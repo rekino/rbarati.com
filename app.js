@@ -55,7 +55,7 @@ if (isProduction) {
     // Start HTTPS server
     const PORT = process.env.PORT || 443;
     server = https.createServer(credentials, app).listen(PORT, () => {
-        console.log(`🚀 Secure server running on https://yourdomain.com:${PORT}`);
+        console.log(`🚀 Server running on https://yourdomain.com:${PORT}`);
     });
 
     // Redirect HTTP to HTTPS
@@ -64,18 +64,11 @@ if (isProduction) {
         res.end();
     }).listen(80, () => console.log("🔄 Redirecting HTTP to HTTPS"));
 } else {
-    console.log("Running in development mode: Using self-signed SSL");
+    console.log("Running in development mode:");
 
-    // Create Self-Signed SSL Certificate
-    const privateKey = fs.readFileSync("ssl/server.key", "utf8");
-    const certificate = fs.readFileSync("ssl/server.cert", "utf8");
-    const credentials = { key: privateKey, cert: certificate };
-
-    // Start HTTPS server on port 3000 (for local testing)
+    // Start HTTP server
     const PORT = process.env.PORT || 3000;
-    server = https.createServer(credentials, app).listen(PORT, () => {
-        console.log(`🚀 Secure server running locally on https://localhost:${PORT}`);
-    });
+    http.createServer(app).listen(PORT, () => console.log(`🚀 Server running on http://yourdomain.com:${PORT}`));
 }
 
 module.exports = server;
