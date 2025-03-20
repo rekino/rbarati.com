@@ -3,10 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title>Welcome to Ramin's Services</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            scroll-behavior: smooth;
+        }
+        section {
+            padding: 80px 0;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .pricing-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .pricing-card:hover {
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to My Secure Express.js Site</h1>
+
+    <!-- Section 1: Welcome -->
+    <section id="welcome" class="bg-light text-center">
+        <div class="container">
+            <h1 class="display-4">Welcome!</h1>
+            <p class="lead">I'm Ramin, a consultant and AI expert.</p>
+            <p>Want to interview me? Try my AI-powered chatbot.</p>
+            <a href="/chat" class="btn btn-primary btn-lg">Take a Virtual Interview</a>
+            <p class="mt-4">Already know me? Scroll down to explore my services.</p>
+            <a href="#consulting" class="btn btn-outline-secondary">Explore Services</a>
+        </div>
+    </section>
+
+    <!-- Section 2: Consultancy Services -->
+    <section id="consulting" class="text-center">
+        <div class="container">
+            <h2 class="mb-4">Consultancy Services</h2>
+            <p class="mb-5">Choose from one of the options below:</p>
+
+            <div class="row">
+                <!-- Free 15-Minute Session -->
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <h4>Ask Me Anything</h4>
+                        <p>15-minute free session</p>
+                        <p class="text-muted">(Limited to once per week)</p>
+                        <a href="https://cal.com/ramin/free-session" class="btn btn-success">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- 30-Minute Support Session -->
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <h4>Project Support</h4>
+                        <p>30-minute session</p>
+                        <h5>€30</h5>
+                        <a href="https://cal.com/ramin/support-session" class="btn btn-success">Book Now</a>
+                    </div>
+                </div>
+
+                <!-- 1-Hour Session -->
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <h4>Full Consultancy</h4>
+                        <p>1-hour session</p>
+                        <h5>€50 per hour</h5>
+                        <a href="https://cal.com/ramin/full-consultancy" class="btn btn-success">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-4">Already decided? Proceed to submit an RFP.</p>
+            <a href="#rfp" class="btn btn-outline-secondary">Request a Proposal</a>
+        </div>
+    </section>
+
+    <!-- Section 3: Request for Proposal -->
+    <section id="rfp" class="bg-light text-center">
+        <div class="container">
+            <h2>Request for Proposal</h2>
+            <p>Submit an RFP for a fixed price of <strong>€200</strong>.</p>
+            <p>If you accept the proposal, the €200 will be deducted from the final bill.</p>
+            <a href="/rfp" class="btn btn-primary btn-lg">Submit RFP</a>
+        </div>
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
