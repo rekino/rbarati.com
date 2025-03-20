@@ -48,23 +48,10 @@ const isProduction = process.env.NODE_ENV === "production";
 let server;
 
 if (isProduction) {
-    console.log("Running in production mode: Using Let's Encrypt SSL");
-
-    // Load Let's Encrypt Certificates
-    const privateKey = fs.readFileSync("/etc/letsencrypt/live/YOUR_DOMAIN/privkey.pem", "utf8");
-    const certificate = fs.readFileSync("/etc/letsencrypt/live/YOUR_DOMAIN/cert.pem", "utf8");
-    const ca = fs.readFileSync("/etc/letsencrypt/live/YOUR_DOMAIN/chain.pem", "utf8");
-
-    const credentials = { key: privateKey, cert: certificate, ca };
-
-    // Start HTTPS server
-    const PORT = process.env.PORT || 443;
-    server = https.createServer(credentials, app).listen(PORT, () => {
-        console.log(`🚀 Server running on https://yourdomain.com:${PORT}`);
-    });
+    console.log("Running in production mode:");
 
     // Redirect HTTP to HTTPS
-    http.createServer((req, res) => {
+    server = http.createServer((req, res) => {
         res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
         res.end();
     }).listen(80, () => console.log("🔄 Redirecting HTTP to HTTPS"));
