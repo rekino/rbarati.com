@@ -47,21 +47,17 @@ app.use("/chat", chatRoutes);
 const isProduction = process.env.NODE_ENV === "production";
 let server;
 
-if (isProduction) {
-    console.log("Running in production mode:");
+// Force HTTPS if behind a reverse proxy
+app.use((req, res, next) => {
+    if (req.headers["x-forwarded-proto"] !== "https") {
+        return res.redirect(`https://${req.headers.host}${req.url}`);
+    }
+    next();
+});
 
-    // Redirect HTTP to HTTPS
-    server = http.createServer((req, res) => {
-        res.writeHead(301, { Location: `https://${req.headers.host}${req.url}` });
-        res.end();
-    }).listen(80, () => console.log("🔄 Redirecting HTTP to HTTPS"));
-} else {
-    console.log("Running in development mode:");
-
-    // Start HTTP server
-    const PORT = process.env.PORT || 3000;
-    server = http.createServer(app).listen(PORT, () => console.log(`🚀 Server running on http://yourdomain.com:${PORT}`));
-}
+// Start HTTP server
+const PORT = process.env.PORT || 80;
+server = http.createServer(app).listen(PORT, () => console.log(`🚀 Server running on http://yourdomain.com:${PORT}`));
 
 const io = new Server(server);
 
