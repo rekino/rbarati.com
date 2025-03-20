@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Chat</title>
+    
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f8f9fa;
+        }
+        .chat-container {
+            max-width: 1200px;
+            width: 100%;
+            height: 80vh;
+            background: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .chatbox {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background: #fff;
+            border-radius: 5px;
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        .resume {
+            padding: 20px;
+            background: #e9ecef;
+            text-align: center;
+        }
+    </style>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/chat.js" defer></script>
+</head>
+<body>
+
+    <div class="container chat-container">
+        <div class="row h-100">
+            <!-- Resume Section (Hidden on Mobile) -->
+            <div class="col-lg-4 d-none d-lg-block resume">
+                <h3>Ramin's Resume</h3>
+                <p>(Placeholder for resume content)</p>
+            </div>
+
+            <!-- Chat Section -->
+            <div class="col-lg-8 col-12 chatbox">
+                <h3 class="text-center">Chat with Ramin's AI</h3>
+                <div id="chatbox" class="chat-messages"></div>
+                <div class="chat-input">
+                    <input type="text" id="message" class="form-control" placeholder="Ask about Ramin's CV...">
+                    <button class="btn btn-primary" id="btnSend">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
