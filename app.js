@@ -45,18 +45,15 @@ app.use("/chat", chatRoutes);
 
 // Determine Environment
 const isProduction = process.env.NODE_ENV === "production";
-let server;
+let server, PORT;
 
-// Force HTTPS if behind a reverse proxy
-app.use((req, res, next) => {
-    if (req.headers["x-forwarded-proto"] !== "https") {
-        return res.redirect(`https://${req.headers.host}${req.url}`);
-    }
-    next();
-});
+if(isProduction){
+    PORT = process.env.PORT || 80;
+} else {
+    PORT = process.env.PORT || 3000;
+}
 
 // Start HTTP server
-const PORT = process.env.PORT || 80;
 server = http.createServer(app).listen(PORT, () => console.log(`🚀 Server running on http://yourdomain.com:${PORT}`));
 
 const io = new Server(server);
