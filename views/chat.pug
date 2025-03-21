@@ -21,7 +21,6 @@ block content
           .card-body
             h3.text-center Chat with my AI
             #chat-box(style="height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;")
-              p.text-muted Chat loading...
             
             .input-group.mt-3
               input#chat-input.form-control(type="text" placeholder="Type a message...")
@@ -29,23 +28,23 @@ block content
 
     //- Include Socket.io for real-time chat
     script(src="/socket.io/socket.io.js")
-    script.
-      const socket = io();
-      const chatBox = document.getElementById('chat-box');
-      const chatInput = document.getElementById('chat-input');
-      const sendBtn = document.getElementById('send-btn');
+    script(src="/js/chat.js")
+    //-   const socket = io();
+    //-   const chatBox = document.getElementById('chat-box');
+    //-   const chatInput = document.getElementById('chat-input');
+    //-   const sendBtn = document.getElementById('send-btn');
 
-      sendBtn.addEventListener('click', () => {
-        const message = chatInput.value.trim();
-        if (message) {
-          socket.emit('chat message', message);
-          chatInput.value = '';
-        }
-      });
+    //-   sendBtn.addEventListener('click', () => {
+    //-     const message = chatInput.value.trim();
+    //-     if (message) {
+    //-       socket.emit('chat message', message);
+    //-       chatInput.value = '';
+    //-     }
+    //-   });
 
-      socket.on('chat message', (msg) => {
-        const msgElement = document.createElement('p');
-        msgElement.textContent = msg;
-        chatBox.appendChild(msgElement);
-        chatBox.scrollTop = chatBox.scrollHeight;
-      });
+    //-   socket.on('chat message', (msg) => {
+    //-     const msgElement = document.createElement('p');
+    //-     msgElement.textContent = msg;
+    //-     chatBox.appendChild(msgElement);
+    //-     chatBox.scrollTop = chatBox.scrollHeight;
+    //-   });
