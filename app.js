@@ -19,7 +19,27 @@ const chatController = require("./controllers/chatController")
 const app = express();
 
 // Security Middleware
-app.use(helmet());
+app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: [
+            "'self'",
+            "https://cdn.jsdelivr.net" // Allow Bootstrap from jsDelivr
+          ],
+          styleSrc: [
+            "'self'",
+            "https://cdn.jsdelivr.net" // Allow Bootstrap CSS
+          ],
+          fontSrc: ["'self'", "https://cdn.jsdelivr.net"], // Allow fonts
+          imgSrc: ["'self'", "data:"], // Allow images
+          connectSrc: ["'self'"],
+          objectSrc: ["'none'"]
+        }
+      }
+    })
+  );
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
