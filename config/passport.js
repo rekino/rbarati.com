@@ -41,29 +41,6 @@ passport.use(new GoogleStrategy({
     }
 }));
 
-// Apple OAuth Strategy
-passport.use(new AppleStrategy({
-    clientID: process.env.APPLE_CLIENT_ID,
-    teamID: process.env.APPLE_TEAM_ID,
-    keyID: process.env.APPLE_KEY_ID,
-    privateKeyString: process.env.APPLE_PRIVATE_KEY,
-    callbackURL: "/auth/apple/callback",
-    scope: ['name', 'email']
-}, async (accessToken, refreshToken, idToken, profile, done) => {
-    try {
-        const [users] = await pool.query("SELECT * FROM users WHERE apple_id = ?", [profile.id]);
-        if (users.length > 0) return done(null, users[0]);
-
-        const [result] = await pool.query(
-            "INSERT INTO users (name, email, apple_id) VALUES (?, ?, ?)", 
-            [profile.name || "Apple User", profile.email || "unknown@example.com", profile.id]
-        );
-        return done(null, { id: result.insertId, name: profile.name, email: profile.email });
-    } catch (err) {
-        return done(err);
-    }
-}));
-
 passport.serializeUser((user, done) => done(null, user.id));
 
 passport.deserializeUser(async (id, done) => {

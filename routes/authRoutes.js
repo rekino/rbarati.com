@@ -16,8 +16,4 @@ router.get('/logout', authController.logout);
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/google/callback', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
 
-// Apple OAuth
-router.get('/apple', passport.authenticate('apple', { scope: ['name', 'email'] }));
-router.get('/apple/callback', passport.authenticate('apple', { successRedirect: '/', failureRedirect: '/login' }));
-
 module.exports = router;
