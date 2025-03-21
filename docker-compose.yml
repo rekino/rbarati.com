@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mariadb:
     image: mariadb:latest
-    container_name: mariadb
+    container_name: mariadb_container
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
@@ -13,8 +13,5 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - ./data/:/var/lib/mysql
       - ./rbarati.sql:/docker-entrypoint-initdb.d/rbarati.sql
-
-volumes:
-  mariadb_data:
