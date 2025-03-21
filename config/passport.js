@@ -6,13 +6,13 @@ const bcrypt = require('bcrypt');
 const pool = require('./db');
 
 // Local Strategy (Email & Password)
-passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
+passport.use(new LocalStrategy({ usernameField: 'email', passwordField: "password" }, async (email, password, done) => {
     try {
         const [users] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
         if (users.length === 0) return done(null, false, { message: "User not found" });
 
         const user = users[0];
-        const match = await bcrypt.compare(password, user.password);
+        const match = await bcrypt.compare(password, user.password_hash);
         if (!match) return done(null, false, { message: "Incorrect password" });
 
         return done(null, user);
