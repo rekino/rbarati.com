@@ -9,7 +9,7 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/login?error=invalid_credentials',
+    failureRedirect: '/auth/login?error=invalid_credentials',
 });
 
 exports.getSignup = (req, res) => {
@@ -18,17 +18,18 @@ exports.getSignup = (req, res) => {
 
 exports.postSignup = async (req, res) => {
     const { name, email, password } = req.body;
-    if (!name || !email || !password) return res.redirect('/signup?error=missing_fields');
+    if (!name || !email || !password) return res.redirect('/auth/signup?error=missing_fields');
 
     try {
         const [existingUsers] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
-        if (existingUsers.length > 0) return res.redirect('/signup?error=email_exists');
+        if (existingUsers.length > 0) return res.redirect('/auth/signup?error=email_exists');
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        await pool.query("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword]);
-        res.redirect('/login');
+        await pool.query("INSERT INTO users (name, email, password_hash) VALUES (?, ?, ?)", [name, email, hashedPassword]);
+        res.redirect('/auth/login');
     } catch (err) {
-        res.redirect('/signup?error=server_error');
+        console.log(err)
+        res.redirect('/auth/signup?error=server_error');
     }
 };
 

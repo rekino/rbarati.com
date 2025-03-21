@@ -9,7 +9,7 @@ block content
         if error
           .alert.alert-danger= error
 
-        form(action="/signup" method="post")
+        form(action="/auth/signup" method="post")
           .mb-3
             label(for="name") Full Name
             input#name.form-control(type="text" name="name" required)
