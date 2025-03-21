@@ -1,0 +1,51 @@
+extends layout
+
+block content
+  .container.mt-4
+    .row
+      //- On large screens, split into two columns
+      .col-lg-6.d-none.d-lg-block
+        .card
+          .card-body
+            h3.text-center My Resume
+            p.text-muted Placeholder for resume content...
+            ul
+              li Experience 1
+              li Experience 2
+              li Education 1
+              li Skills: JavaScript, Node.js, AI
+            a.btn.btn-primary.mt-2(href="/resume.pdf" download="Resume.pdf") Download Resume
+
+      .col-lg-6
+        .card
+          .card-body
+            h3.text-center Chat with my AI
+            #chat-box(style="height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;")
+              p.text-muted Chat loading...
+            
+            .input-group.mt-3
+              input#chat-input.form-control(type="text" placeholder="Type a message...")
+              button#send-btn.btn.btn-primary Send
+
+    //- Include Socket.io for real-time chat
+    script(src="/socket.io/socket.io.js")
+    script.
+      const socket = io();
+      const chatBox = document.getElementById('chat-box');
+      const chatInput = document.getElementById('chat-input');
+      const sendBtn = document.getElementById('send-btn');
+
+      sendBtn.addEventListener('click', () => {
+        const message = chatInput.value.trim();
+        if (message) {
+          socket.emit('chat message', message);
+          chatInput.value = '';
+        }
+      });
+
+      socket.on('chat message', (msg) => {
+        const msgElement = document.createElement('p');
+        msgElement.textContent = msg;
+        chatBox.appendChild(msgElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      });

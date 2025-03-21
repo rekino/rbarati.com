@@ -1,24 +1,37 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const pool = require('../config/db');
 
-const users = []; // Temporary storage (replace with database)
-
-exports.register = async (req, res) => {
-    const { username, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    users.push({ username, password: hashedPassword });
-
-    res.status(201).json({ message: "User registered" });
+exports.getLogin = (req, res) => {
+    res.render('login', { title: 'Login', error: req.query.error || null });
 };
 
-exports.login = async (req, res) => {
-    const { username, password } = req.body;
-    const user = users.find(u => u.username === username);
-    
-    if (!user || !(await bcrypt.compare(password, user.password))) {
-        return res.status(401).json({ message: "Invalid credentials" });
-    }
 
-    const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "1h" });
-    res.json({ token });
+exports.postLogin = passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login?error=invalid_credentials',
+});
+
+exports.getSignup = (req, res) => {
+    res.render('signup', { title: 'Sign Up', error: req.query.error || null });
+};
+
+exports.postSignup = async (req, res) => {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) return res.redirect('/signup?error=missing_fields');
+
+    try {
+        const [existingUsers] = await pool.query("SELECT * FROM users WHERE email = ?", [email]);
+        if (existingUsers.length > 0) return res.redirect('/signup?error=email_exists');
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        await pool.query("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword]);
+        res.redirect('/login');
+    } catch (err) {
+        res.redirect('/signup?error=server_error');
+    }
+};
+
+exports.logout = (req, res) => {
+    req.logout(() => res.redirect('/'));
 };
