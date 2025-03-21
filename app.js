@@ -48,6 +48,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use((req, res, next) => {
+    res.locals.user = req.user || null; // Make user available in Pug templates
+    next();
+});
+  
 
 // Rate Limiting
 const limiter = rateLimit({
