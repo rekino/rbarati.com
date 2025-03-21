@@ -29,22 +29,3 @@ block content
     //- Include Socket.io for real-time chat
     script(src="/socket.io/socket.io.js")
     script(src="/js/chat.js")
-    //-   const socket = io();
-    //-   const chatBox = document.getElementById('chat-box');
-    //-   const chatInput = document.getElementById('chat-input');
-    //-   const sendBtn = document.getElementById('send-btn');
-
-    //-   sendBtn.addEventListener('click', () => {
-    //-     const message = chatInput.value.trim();
-    //-     if (message) {
-    //-       socket.emit('chat message', message);
-    //-       chatInput.value = '';
-    //-     }
-    //-   });
-
-    //-   socket.on('chat message', (msg) => {
-    //-     const msgElement = document.createElement('p');
-    //-     msgElement.textContent = msg;
-    //-     chatBox.appendChild(msgElement);
-    //-     chatBox.scrollTop = chatBox.scrollHeight;
-    //-   });
