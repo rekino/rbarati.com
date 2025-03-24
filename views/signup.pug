@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-4
+        h2.text-center Sign Up
+
+        if error
+          .alert.alert-danger= error
+
+        form(action="/auth/signup" method="post")
+          .mb-3
+            label(for="name") Full Name
+            input#name.form-control(type="text" name="name" required)
+          .mb-3
+            label(for="email") Email
+            input#email.form-control(type="email" name="email" required)
+          .mb-3
+            label(for="password") Password
+            input#password.form-control(type="password" name="password" required)
+          .mb-3
+            label(for="confirm-password") Confirm Password
+            input#confirm-password.form-control(type="password" name="confirm-password" required)
+          button.btn.btn-primary.w-100(type="submit") Sign Up
+
+        hr
+
+        p.text-center Or sign up using:
+        a.btn.btn-danger.w-100.mb-2(href="/auth/google") Google
+
+        hr
+
+        p.text-center Already have an account? 
+          a(href="/auth/login") Login

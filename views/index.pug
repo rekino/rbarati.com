@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  .container.mt-5
+    //- Section 1: Welcome
+    .row.justify-content-center.text-center
+      .col-md-8
+        h1 Welcome to Barati Professional Software Services
+        p I help businesses with AI, software development, and consulting. 
+        p Want to interview me? Take a virtual interview with my chatbot.
+        a.btn.btn-primary.mt-3(href="/chat") Take a Virtual Interview
+        p.mt-3 If you already know me, scroll down to explore my services.
+
+    hr.my-5
+
+    //- Section 2: Consultancy Services
+    .row.justify-content-center
+      .col-md-8.text-center
+        h2 Consultancy Services
+        p Choose the best option for your needs.
+
+    .row.justify-content-center
+      .col-md-4
+        .card
+          .card-body.text-center
+            h4 Ask Me Anything
+            p 15-minute free session once a week.
+            p Free
+            a.btn.btn-outline-primary(href="/book?type=free") Book Now
+      .col-md-4
+        .card
+          .card-body.text-center
+            h4 Support Session
+            p 30-minute project support session.
+            p €30.00
+            a.btn.btn-outline-success(href="/book?type=support") Book Now
+      .col-md-4
+        .card
+          .card-body.text-center
+            h4 Full Consultation
+            p 1-hour consulting session.
+            p €50.00
+            a.btn.btn-outline-danger(href="/book?type=full") Book Now
+
+    p.text-center.mt-4 If you don't need a session, check out my RFP service below.
+
+    hr.my-5
+
+    //- Section 3: Request for Proposal
+    .row.justify-content-center.text-center
+      .col-md-8
+        h2 Request for Proposal (RFP)
+        p Submit a proposal request for €200, which will be deducted from the final project bill if accepted.
+        a.btn.btn-primary.mt-3(href="/rfp") Submit an RFP

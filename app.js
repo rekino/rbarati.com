@@ -1,16 +1,17 @@
-require("dotenv").config();
-const fs = require("fs");
 const http = require("http");
-const https = require("https");
 const express = require("express");
+const session = require('express-session');
+const passport = require('passport');
 const path = require("path");
 const helmet = require("helmet");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const { Server } = require("socket.io");
+require('./config/passport');
+require('dotenv').config();
 
 const pageRoutes = require("./routes/pages");
-const apiRoutes = require("./routes/api");
+const authRoutes = require("./routes/authRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 
 const chatController = require("./controllers/chatController")
@@ -18,10 +19,40 @@ const chatController = require("./controllers/chatController")
 const app = express();
 
 // Security Middleware
-app.use(helmet());
+app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: [
+            "'self'",
+            "https://cdn.jsdelivr.net" // Allow Bootstrap from jsDelivr
+          ],
+          styleSrc: [
+            "'self'",
+            "https://cdn.jsdelivr.net" // Allow Bootstrap CSS
+          ],
+          fontSrc: ["'self'", "https://cdn.jsdelivr.net"], // Allow fonts
+          imgSrc: ["'self'", "data:"], // Allow images
+          connectSrc: ["'self'"],
+          objectSrc: ["'none'"]
+        }
+      }
+    })
+  );
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Passport and Session Middleware
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use((req, res, next) => {
+    res.locals.user = req.user || null; // Make user available in Pug templates
+    next();
+});
+  
 
 // Rate Limiting
 const limiter = rateLimit({
@@ -32,7 +63,7 @@ const limiter = rateLimit({
 app.use("/api/", limiter);
 
 // Set view engine
-app.set("view engine", "ejs");
+app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 // Static files
@@ -40,21 +71,23 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/", pageRoutes);
-app.use("/api/v1", apiRoutes);
 app.use("/chat", chatRoutes);
+app.use("/auth", authRoutes);
 
 // Determine Environment
 const isProduction = process.env.NODE_ENV === "production";
-let server, PORT;
+let server, PORT, DOMAIN;
 
 if(isProduction){
     PORT = process.env.PORT || 80;
+    DOMAIN = process.env.DOMAIN || "www.rbarati.com";
 } else {
     PORT = process.env.PORT || 3000;
+    DOMAIN = process.env.DOMAIN || "localhost";
 }
 
 // Start HTTP server
-server = http.createServer(app).listen(PORT, () => console.log(`🚀 Server running on http://yourdomain.com:${PORT}`));
+server = http.createServer(app).listen(PORT, () => console.log(`🚀 Server running on http://${DOMAIN}:${PORT}`));
 
 const io = new Server(server);
 

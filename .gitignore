@@ -1,3 +1,6 @@
+# Mariadb data
+data/
+
 # Logs
 logs
 *.log
