@@ -1,0 +1,31 @@
+extends layout 
+
+block content
+  .container.mt-5
+    h2 Book a Session
+    p Select a session type to see available slots.
+
+    // Session Type Selector
+    .mb-3
+      label.form-label(for="session-type") Select a Session Type:
+      select#session-type.form-select
+        option(value="") -- Select an Option --
+        option(value="15") 15-Minute AMA (Free, once per week)
+        option(value="30") 30-Minute Support (€30)
+        option(value="60") 1-Hour Consultation (€50)
+
+    // Date-Time Picker
+    .mb-3
+      label.form-label(for="date") Choose a Date:
+      input#date.form-control(type="date", disabled)
+
+    .mb-3
+      label.form-label(for="time") Choose a Time Slot:
+      select#time.form-select(disabled)
+        option(value="") -- Select a Time Slot --
+
+    // Book Button
+    button#book-btn.btn.btn-primary(disabled) Book Now
+
+  script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+  script(src="/js/booking.js")

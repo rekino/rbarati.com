@@ -13,8 +13,9 @@ require('dotenv').config();
 const pageRoutes = require("./routes/pages");
 const authRoutes = require("./routes/authRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 
-const chatController = require("./controllers/chatController")
+const chatController = require("./controllers/chatController");
 
 const app = express();
 
@@ -73,6 +74,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", pageRoutes);
 app.use("/chat", chatRoutes);
 app.use("/auth", authRoutes);
+app.use("/booking", bookingRoutes);
 
 // Determine Environment
 const isProduction = process.env.NODE_ENV === "production";
