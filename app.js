@@ -27,14 +27,16 @@ app.use(
           defaultSrc: ["'self'"],
           scriptSrc: [
             "'self'",
-            "https://cdn.jsdelivr.net" // Allow Bootstrap from jsDelivr
+            "https://cdn.jsdelivr.net", // Allow Bootstrap from jsDelivr
+            "https://code.jquery.com", // Allow jQuery from jquery
           ],
           styleSrc: [
             "'self'",
-            "https://cdn.jsdelivr.net" // Allow Bootstrap CSS
+            "https://cdn.jsdelivr.net", // Allow Bootstrap CSS
+            "https://code.jquery.com", // Allow jQuery CSS
           ],
           fontSrc: ["'self'", "https://cdn.jsdelivr.net"], // Allow fonts
-          imgSrc: ["'self'", "data:"], // Allow images
+          imgSrc: ["'self'", "data:", "https://code.jquery.com"], // Allow images
           connectSrc: ["'self'"],
           objectSrc: ["'none'"]
         }
