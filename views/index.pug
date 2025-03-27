@@ -19,28 +19,61 @@ block content
         h2 Consultancy Services
         p Choose the best option for your needs.
 
-    .row.justify-content-center
-      .col-md-4
-        .card
-          .card-body.text-center
-            h4 Ask Me Anything
-            p 15-minute free session once a week.
-            p Free
-            a.btn.btn-outline-primary(href="/book?type=free") Book Now
-      .col-md-4
-        .card
-          .card-body.text-center
-            h4 Support Session
-            p 30-minute project support session.
-            p €30.00
-            a.btn.btn-outline-success(href="/book?type=support") Book Now
-      .col-md-4
-        .card
-          .card-body.text-center
-            h4 Full Consultation
-            p 1-hour consulting session.
-            p €50.00
-            a.btn.btn-outline-danger(href="/book?type=full") Book Now
+    .row.mt-4.justify-content-center.g-3
+      .col-md-4.px-3
+        .card.h-100
+          .card-body.d-flex.flex-column
+            h4.card-title.text-center Ask Me Anything
+            p.text-center A free session available once per week for general inquiries.
+            .text-start
+              p.text-muted 
+                i.bi.bi-clock-fill.me-2
+                span 15 minutes
+              p.text-muted 
+                i.bi.bi-calendar3.me-2
+                span Once per week
+              p.text-muted 
+                i.bi.bi-cloud-slash.me-2
+                span No recordings available.
+              p.text-center.fw-bold.fs-4 €0.00
+            .mt-auto.text-center
+              a.btn.btn-outline-primary(href="/book?type=free") Book Now
+      .col-md-4.px-3
+        .card.h-100
+          .card-body.d-flex.flex-column
+            h4.card-title.text-center Support Session
+            p.text-center Get personalized assistance on your projects and challenges.
+            .text-start
+              p.text-muted 
+                i.bi.bi-clock-fill.me-2
+                span 30 minutes
+              p.text-muted
+                i.bi.bi-calendar3.me-2
+                span Once every 3 days.
+              p.text-muted 
+                i.bi.bi-cloud-check.me-2
+                span Audio recording available.
+            p.text-center.fw-bold.fs-4 €30.00
+            .mt-auto.text-center
+              a.btn.btn-outline-success(href="/book?type=support") Book Now
+      .col-md-4.px-3
+        .card.h-100
+          .card-body.d-flex.flex-column
+            h4.card-title.text-center Full Consultation
+            p.text-center A deep-dive session for strategic planning, problem-solving, or in-depth discussions.
+            .text-start
+              p.text-muted 
+                i.bi.bi-clock-fill.me-2
+                span 60 minutes
+              p.text-muted
+                i.bi.bi-calendar3.me-2
+                span Once per day.
+              p.text-muted
+                i.bi.bi-cloud-check.me-2
+                span Audio recording available.
+            p.text-center.fw-bold.fs-4 €50.00
+            .mt-auto.text-center
+              a.btn.btn-outline-danger(href="/book?type=full") Book Now
 
     p.text-center.mt-4 If you don't need a session, check out my RFP service below.
 
