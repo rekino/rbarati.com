@@ -26,7 +26,7 @@ router.post("/", upload.single("pdfFile"), (req, res) => {
   // Here you can save the data to your database
   console.log({ proposalText, proposalLink, pdfFile });
 
-  res.send("RFP submitted successfully!");
+  res.redirect('/rfp');
 });
 
 module.exports = router;
