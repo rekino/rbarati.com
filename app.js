@@ -14,6 +14,7 @@ const pageRoutes = require("./routes/pages");
 const authRoutes = require("./routes/authRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
+const rfpRoutes = require("./routes/rfpRoutes");
 
 const chatController = require("./controllers/chatController");
 
@@ -29,11 +30,13 @@ app.use(
             "'self'",
             "https://cdn.jsdelivr.net", // Allow Bootstrap from jsDelivr
             "https://code.jquery.com", // Allow jQuery from jquery
+            "https://cdn.quilljs.com", // Allow Quill.js
           ],
           styleSrc: [
             "'self'",
             "https://cdn.jsdelivr.net", // Allow Bootstrap CSS
             "https://code.jquery.com", // Allow jQuery CSS
+            "https://cdn.quilljs.com", // Allow Quill.js CSS
           ],
           fontSrc: ["'self'", "https://cdn.jsdelivr.net"], // Allow fonts
           imgSrc: ["'self'", "data:", "https://code.jquery.com"], // Allow images
@@ -77,6 +80,7 @@ app.use("/", pageRoutes);
 app.use("/chat", chatRoutes);
 app.use("/auth", authRoutes);
 app.use("/booking", bookingRoutes);
+app.use("/rfp", rfpRoutes)
 
 // Determine Environment
 const isProduction = process.env.NODE_ENV === "production";

@@ -1,0 +1,38 @@
+extends layout
+
+block links
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css")
+
+block content
+  .container.mt-5
+    h1.text-center Submit a Request for Proposal (RFP)
+    p.text-center Choose one of the options below to submit your proposal.
+
+    .row.mt-4
+      .col-md-12
+        form#rfpForm(action="/rfp" method="POST" enctype="multipart/form-data")
+
+          // Option 1: Rich Text Editor
+          .mb-4
+            label.form-label(for="proposalText") Write Your Proposal
+            #editor.border.p-3
+
+          input(type="hidden" name="proposalText" id="hiddenProposalText")
+
+          // Option 2: Submit a Link
+          .mb-4
+            label.form-label(for="proposalLink") Provide a Link
+            input.form-control(type="url" name="proposalLink" id="proposalLink" placeholder="https://example.com")
+
+          // Option 3: Upload a PDF
+          .mb-4
+            label.form-label(for="pdfFile") Upload a PDF File
+            input.form-control(type="file" name="pdfFile" id="pdfFile" accept="application/pdf")
+
+          // Submit Button
+          button.btn.btn-primary(type="submit") Submit RFP
+
+block scripts
+  script(src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js")
+  script(src="/js/rfp.js")
+    
