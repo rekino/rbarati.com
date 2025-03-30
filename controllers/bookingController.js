@@ -55,7 +55,7 @@ async function getAvailableSlots(date, duration) {
     },
   });
 
-  const busy = response.data.calendars["rekino@gmail.com"].busy; // array of busy periods
+  const busy = response.data.calendars[process.env.GOOGLE_CALENDAR_ID].busy; // array of busy periods
 
   // Generate available slots in 15-minute increments.
   const availableSlots = [];
