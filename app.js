@@ -13,9 +13,10 @@ require('dotenv').config();
 const pageRoutes = require("./routes/pages");
 const authRoutes = require("./routes/authRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const bookingRoutes = require("./routes/bookingRoutes");
 const rfpRoutes = require("./routes/rfpRoutes");
 
-const chatController = require("./controllers/chatController")
+const chatController = require("./controllers/chatController");
 
 const app = express();
 
@@ -28,15 +29,17 @@ app.use(
           scriptSrc: [
             "'self'",
             "https://cdn.jsdelivr.net", // Allow Bootstrap from jsDelivr
+            "https://code.jquery.com", // Allow jQuery from jquery
             "https://cdn.quilljs.com", // Allow Quill.js
           ],
           styleSrc: [
             "'self'",
             "https://cdn.jsdelivr.net", // Allow Bootstrap CSS
+            "https://code.jquery.com", // Allow jQuery CSS
             "https://cdn.quilljs.com", // Allow Quill.js CSS
           ],
           fontSrc: ["'self'", "https://cdn.jsdelivr.net"], // Allow fonts
-          imgSrc: ["'self'", "data:"], // Allow images
+          imgSrc: ["'self'", "data:", "https://code.jquery.com"], // Allow images
           connectSrc: ["'self'"],
           objectSrc: ["'none'"]
         }
@@ -76,6 +79,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", pageRoutes);
 app.use("/chat", chatRoutes);
 app.use("/auth", authRoutes);
+app.use("/booking", bookingRoutes);
 app.use("/rfp", rfpRoutes)
 
 // Determine Environment
