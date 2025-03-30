@@ -51,7 +51,7 @@ async function getAvailableSlots(date, duration) {
       timeMin,
       timeMax,
       timeZone: "Europe/Amsterdam",
-      items: [{ id: "rekino@gmail.com" }],
+      items: [{ id: process.env.GOOGLE_CALENDAR_ID }],
     },
   });
 
@@ -100,7 +100,7 @@ async function bookSession(date, time, duration, userEmail) {
   const calendar = google.calendar({ version: "v3", auth });
   
   // Construct start and end Date objects (assuming CET, UTC+1)
-  const startDateTime = new Date(`${date}T${time}:00+01:00`);
+  const startDateTime = new Date(time);
   const endDateTime = new Date(startDateTime.getTime() + duration * 60000);
   
   // Build the event with Google Meet conference data
@@ -130,7 +130,7 @@ async function bookSession(date, time, duration, userEmail) {
 
   // Insert the event into the calendar with conferenceDataVersion set to 1
   const response = await calendar.events.insert({
-    calendarId: "primary",
+    calendarId: process.env.GOOGLE_CALENDAR_ID,
     resource: event,
     conferenceDataVersion: 1,
   });
@@ -162,15 +162,17 @@ async function bookSession(date, time, duration, userEmail) {
 
   // Send confirmation email with ICS file attached
   const transporter = nodemailer.createTransport({
-    service: "Gmail", // or your preferred email service
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    secure: true,
     auth: {
-      user: process.env.EMAIL_USER, // from your .env
+      user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
   });
 
   const mailOptions = {
-    from: `"Ramin" <${process.env.EMAIL_USER}>`,
+    from: `"Ramin Barati" <${process.env.EMAIL_USER}>`,
     to: userEmail,
     subject: "Your Consultation Booking Confirmation",
     text: `Your consultation with Ramin is confirmed for ${date} at ${time} CET.
