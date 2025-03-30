@@ -9,10 +9,9 @@ block content
     .mb-3
       label.form-label(for="session-type") Select a Session Type:
       select#session-type.form-select(required)
-        option(value="") -- Select an Option --
-        option(value="15" selected=(type === "free")) 15-Minute AMA (Free)
-        option(value="30" selected=(type === "support")) 30-Minute Support (€30)
-        option(value="60" selected=(type === "full")) 1-Hour Consultation (€50)
+        option(value="free" selected=(type === "free")) 15-Minute AMA (Free)
+        option(value="support" selected=(type === "support")) 30-Minute Support (€30)
+        option(value="full" selected=(type === "full")) 1-Hour Consultation (€50)
 
     // Date-Time Picker
     .mb-3
