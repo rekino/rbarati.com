@@ -87,7 +87,7 @@ async function getAvailableSlots(date, duration) {
 }
 
 /**
- * Books a session by creating an event in Google Calendar with a Meet conference,
+ * Books a session by creating an event in Google Calendar with a Jitsi conference,
  * then generates an ICS file and sends a confirmation email.
  *
  * - date: YYYY-MM-DD
@@ -102,6 +102,10 @@ async function bookSession(date, time, duration, userEmail) {
   // Construct start and end Date objects (assuming CET, UTC+1)
   const startDateTime = new Date(time);
   const endDateTime = new Date(startDateTime.getTime() + duration * 60000);
+
+  // Generate a unique Jitsi Meet room URL
+  const jitsiRoom = `rbarati-${Date.parse(time)}`;
+  const meetLink = `https://meet.jit.si/${jitsiRoom}`;
   
   // Build the event with Google Meet conference data
   const event = {
@@ -115,17 +119,7 @@ async function bookSession(date, time, duration, userEmail) {
       dateTime: endDateTime.toISOString(),
       timeZone: "Europe/Amsterdam",
     },
-    attendees: [
-      { email: userEmail }
-    ],
-    conferenceData: {
-      createRequest: {
-        requestId: uuidv4(), // Unique identifier for the request
-        conferenceSolutionKey: {
-          type: "hangoutsMeet",
-        },
-      },
-    },
+    location: meetLink,
   };
 
   // Insert the event into the calendar with conferenceDataVersion set to 1
@@ -160,8 +154,7 @@ async function bookSession(date, time, duration, userEmail) {
     throw new Error("ICS generation failed: " + error);
   }
 
-  // Send confirmation email with ICS file attached
-  const transporter = nodemailer.createTransport({
+  let nodemailerConfig = {
     host: process.env.EMAIL_HOST,
     port: process.env.EMAIL_PORT,
     secure: true,
@@ -169,7 +162,16 @@ async function bookSession(date, time, duration, userEmail) {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
-  });
+  }
+
+  if (process.env.NODE_ENV !== "production")
+    nodemailerConfig.tls = {
+      // Do not fail on invalid certs
+      rejectUnauthorized: false
+    }
+
+  // Send confirmation email with ICS file attached
+  const transporter = nodemailer.createTransport(nodemailerConfig);
 
   const mailOptions = {
     from: `"Ramin Barati" <${process.env.EMAIL_USER}>`,
