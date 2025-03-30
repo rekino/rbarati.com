@@ -26,11 +26,11 @@ router.get("/availability", async (req, res) => {
 // Endpoint to book a session
 router.post("/book", async (req, res) => {
     try {
-        const { date, time, duration } = req.body;
-        if (!date || !time || !duration ) {
+        const { date, time, type } = req.body;
+        if (!date || !time || !type ) {
         return res.status(400).json({ error: "Missing booking parameters" });
         }
-        const event = await bookSession(date, time, parseInt(duration), req.user.email);
+        const event = await bookSession(date, time, duration[type], req.user.email);
         res.json({ message: "Booking successful", event });
     } catch (err) {
         console.error(err);
