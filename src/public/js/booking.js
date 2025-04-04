@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", async () => {
    */
   async function loadAvailableSlots(date, sessionType) {
     try {
-      const response = await axios.get(`/booking/availability?date=${date}&type=${sessionType}`);
+      const response = await axios.get(
+        `/booking/availability?date=${date}&type=${sessionType}`,
+      );
       const slots = response.data.slots;
 
       if (slots.length === 0) {
@@ -39,10 +41,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         date = new Date(slot);
         const option = document.createElement("option");
         option.value = slot;
-        option.textContent = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        option.textContent = date.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
         timeSelect.appendChild(option);
       });
-
     } catch (error) {
       console.error("Error fetching available time slots:", error);
     }
