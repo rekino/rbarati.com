@@ -16,6 +16,7 @@
 #chat-box > .message.confidant {
   background-color: darkslategray;
   color: #ddd;
+  align-self: flex-start;
 }
 #chat-box > .message.user {
   background-color:lightblue;
@@ -28,4 +29,8 @@
 
 #editor {
   min-height: 200px;
+}
+
+.hidden {
+  display: none;
 }
