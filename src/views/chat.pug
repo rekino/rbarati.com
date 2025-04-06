@@ -21,14 +21,12 @@ block content
           .card-body
             h3.text-center Chat with my AI assisstant
             #chat-box
-                //- .message.confidant I'm instructed to answer questions about Ramin based on available information. However, I might occasionally make mistakes or miss important details. Always verify my responses with Ramin's official CV to ensure accuracy, especially when it comes to skills, experience, or qualifications.
-                //- .message.user I understand.
             
             #chat-actions.input-group.mt-3
               button#start-btn.btn.btn-primary Start or Continue Your Interview
-              //- if history
-              //-   input#chat-input.form-control(type="text" name="message" placeholder="Type a message...")
-              //-   button#send-btn.btn.btn-primary(default) Send
+            #chat-default-actions.input-group.mt-3.hidden
+              textarea#chat-input.form-control(placeholder="Type a message...")
+              button#send-btn.btn.btn-primary(default disabled) Send
 
     script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
     script(src="/js/chat.js")
