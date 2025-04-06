@@ -28,7 +28,10 @@ declare global {
 declare module 'express-session' {
   interface SessionData {
     user: Express.User,
-    history: object
+    history: {
+      conversation: {role: string, text: string}[],
+      actions: {action: string, class: string}[],
+    },
   }
 }
 
