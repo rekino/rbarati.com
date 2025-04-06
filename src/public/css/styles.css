@@ -3,6 +3,27 @@
   overflow-y: auto;
   border: 1px solid #ddd;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#chat-box > .message {
+  max-width: 80%;
+  border-radius: 10px;
+  padding: 0.5rem;
+  margin-bottom: 10px;
+}
+#chat-box > .message.confidant {
+  background-color: darkslategray;
+  color: #ddd;
+}
+#chat-box > .message.user {
+  background-color:lightblue;
+  align-self: flex-end;
+}
+#chat-actions {
+  display: flex;
+  justify-content: center;
 }
 
 #editor {

@@ -1,4 +1,13 @@
-const socket = io();
+async function startInterview() {
+  try{
+    const reponse = await axios.get('/chat/history');
+
+    reponse.data.conversation.forEach(dialog => addMessage(dialog.role, dialog.text));
+    replaceActions(reponse.data.actions);
+  } catch (error) {
+    console.error("Error fetching chat history:", error);
+  }
+}
 
 function sendMessage() {
   const input = document.getElementById("chat-input");
@@ -6,21 +15,22 @@ function sendMessage() {
 
   if (message) {
     addMessage("You", message);
-    socket.emit("message", message.trim());
     input.value = "";
   }
 }
 
-socket.on("response", (msg) => {
-  addMessage("AI", msg);
-});
+function replaceActions(actions) {
+  const chatActions = document.getElementById("chat-actions");
+  chatActions.innerHTML = actions;
+}
 
 function addMessage(sender, text) {
   const chatbox = document.getElementById("chat-box");
-  const messageElem = document.createElement("p");
-  messageElem.innerHTML = `<strong>${sender}:</strong> ${text}`;
+  const messageElem = document.createElement("div");
+  messageElem.className = sender === "agent" ? "message confidant" : "message user"
+  messageElem.innerHTML = text;
   chatbox.appendChild(messageElem);
 }
 
-const btnSend = document.getElementById("send-btn");
-btnSend.addEventListener("click", sendMessage);
+const btnStart = document.getElementById("start-btn");
+btnStart.addEventListener("click", startInterview);

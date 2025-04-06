@@ -19,13 +19,16 @@ block content
       .col-lg-6
         .card
           .card-body
-            h3.text-center Chat with my AI
+            h3.text-center Chat with my AI assisstant
             #chat-box
+                //- .message.confidant I'm instructed to answer questions about Ramin based on available information. However, I might occasionally make mistakes or miss important details. Always verify my responses with Ramin's official CV to ensure accuracy, especially when it comes to skills, experience, or qualifications.
+                //- .message.user I understand.
             
-            .input-group.mt-3
-              input#chat-input.form-control(type="text" placeholder="Type a message...")
-              button#send-btn.btn.btn-primary Send
+            #chat-actions.input-group.mt-3
+              button#start-btn.btn.btn-primary Start or Continue Your Interview
+              //- if history
+              //-   input#chat-input.form-control(type="text" name="message" placeholder="Type a message...")
+              //-   button#send-btn.btn.btn-primary(default) Send
 
-    //- Include Socket.io for real-time chat
-    script(src="/socket.io/socket.io.js")
+    script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
     script(src="/js/chat.js")

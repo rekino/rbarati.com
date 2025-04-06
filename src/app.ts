@@ -6,7 +6,6 @@ import path from "path";
 import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
-import { Server } from "socket.io";
 require("./config/passport");
 require("dotenv").config();
 
@@ -16,8 +15,6 @@ import chatRoutes from "./routes/chatRoutes";
 import bookingRoutes from "./routes/bookingRoutes";
 import rfpRoutes from "./routes/rfpRoutes";
 
-import { handleChat } from "./controllers/chatController";
-
 declare global {
   namespace Express {
     interface User {
@@ -25,6 +22,13 @@ declare global {
       name: string,
       email: string,
     }
+  }
+}
+
+declare module 'express-session' {
+  interface SessionData {
+    user: Express.User,
+    history: object
   }
 }
 
@@ -116,21 +120,4 @@ server = http
     console.log(`🚀 Server running on http://${DOMAIN}:${PORT}`),
   );
 
-const io = new Server(server);
-
-// WebSocket connection
-io.on("connection", (socket) => {
-  console.log("A user connected");
-
-  socket.on("message", async (msg) => {
-    console.log("Received:", msg);
-    const response = await handleChat(msg);
-    socket.emit("response", response);
-  });
-
-  socket.on("disconnect", () => {
-    console.log("User disconnected");
-  });
-});
-
-module.exports = server;
+export default server;
