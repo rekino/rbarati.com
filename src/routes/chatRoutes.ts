@@ -11,7 +11,7 @@ router.get("/", (req: Request, res: Response) => {
 router.get("/history", (req: Request, res: Response) => {
   if(!req.session.history)
     req.session.history = {
-      conversation: [{role: "agent", text: "To enhance our service and make your experience even better, we'd like to store your conversations with me. This data helps me train and improve my abilities in the future. Do you agree to the storage and analysis of your chat data?"}],
+      conversation: [{role: "assistant", content: "Welcome to Barati Professional Services! My name is Lancelot and I am Ramin's virtual assistant. To enhance our service and make your experience even better, we'd like to store your conversations with me. This data helps me train and improve my abilities in the future. Do you agree to the storage and analysis of your chat data?"}],
       actions: [
         {action: "Yes, I agree.", class: "btn btn-primary"},
         {action: "No, don't record our conversation.", class: "btn btn-secondary"},
@@ -55,15 +55,19 @@ router.post("/history", async (req: Request, res: Response) => {
       return;
     }
 
-    reply = "Alright! Now tell me how we can help you?";
+    reply = "Great! How can we be of help?";
     actions = [];
   } else {
-    reply = await handleChat(message);
+    reply = await handleChat([
+      "from 2023 to 2025, Ramin was a Technical Lead at Paya co., Tehran, Iran. He lead a team of data scientists and software developers in conception, design and development of ML-oriented solutions, covering vision, speech and NLP. The project resulted in setting up an automated pipeline for packaging machine learning models that are ready for deployment on public or private clouds using Nvidia Triton.",
+      "from 2021 to 2022, Ramin was a Data Engineer at CarNext.com, Remote. He developed Scala applications to parse Kafka topics from Confluence cloud and feature them in the delta lake format using Spark for a datamesh solution on Amazon S3.",
+      "from 2017 to 2020, Ramin was an Algorithm Engineer at Mahan Airlines, Tehran, Iran. He modeled and solved flight planning and crew assignment optimization problems using MIP and CSP, developed a Python/NodeJS software solution to enable human-machine collaboration in overcoming operational issues which decreased the planning time by 3 folds, and supervised new developers and instructed them in coding conventions and standards.",
+    ], history.conversation, message);
     actions = [];
   }
 
-  history.conversation.push({ role: "user", text: message });
-  history.conversation.push({ role: "agent", text: reply });
+  history.conversation.push({ role: "user", content: message });
+  history.conversation.push({ role: "assistant", content: reply });
   history.actions = actions;
 
   res.json({

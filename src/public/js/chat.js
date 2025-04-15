@@ -2,7 +2,7 @@ async function startInterview() {
   try{
     const response = await axios.get('/chat/history');
 
-    response.data.conversation.forEach(dialog => addMessage(dialog.role, dialog.text));
+    response.data.conversation.forEach(dialog => addMessage(dialog.role, dialog.content));
     replaceActions(response.data.actions);
   } catch (error) {
     console.error("Error fetching chat history:", error);
@@ -15,10 +15,10 @@ async function sendMessage(message) {
 
     const response = await axios.post("/chat/history", { message: message });
 
-    addMessage("agent", response.data.message);
+    addMessage("assistant", response.data.message);
     replaceActions(response.data.actions);
   } catch (error) {
-    console.error("Error fetching chat history:", error);
+    console.error("Error sending message:", error);
     removeLastMessage();
   }
 }
@@ -44,7 +44,7 @@ function replaceActions(actions) {
 
 function addMessage(sender, text) {
   const messageElem = document.createElement("div");
-  messageElem.className = sender === "agent" ? "message confidant" : "message user"
+  messageElem.className = sender === "assistant" ? "message confidant" : "message user"
   messageElem.innerHTML = text;
   chatbox.appendChild(messageElem);
 }
