@@ -9,6 +9,8 @@ import rateLimit from "express-rate-limit";
 require("./config/passport");
 require("dotenv").config();
 
+import { IChatMessage } from "./models/chat";
+
 import pageRoutes from "./routes/pages";
 import authRoutes from "./routes/authRoutes";
 import chatRoutes from "./routes/chatRoutes";
@@ -29,7 +31,7 @@ declare module 'express-session' {
   interface SessionData {
     user: Express.User,
     history: {
-      conversation: {role: string, text: string}[],
+      conversation: IChatMessage[],
       actions: {action: string, class: string}[],
     },
   }
