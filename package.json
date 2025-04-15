@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/rekino/rbarati.com#readme",
   "dependencies": {
+    "@google/genai": "^0.7.0",
+    "@pinecone-database/pinecone": "^5.1.1",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
@@ -43,10 +45,11 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "pug": "^3.0.3",
-    "socket.io": "^4.8.1"
+    "together-ai": "^0.13.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/express-session": "^1.18.1",
     "@types/multer": "^1.4.12",
@@ -55,6 +58,7 @@
     "@types/passport": "^1.0.17",
     "@types/passport-google-oauth20": "^2.0.16",
     "@types/passport-local": "^1.0.38",
+    "@types/pug": "^2.0.10",
     "eslinter": "^3.2.1",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
