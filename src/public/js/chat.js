@@ -12,8 +12,11 @@ async function startInterview() {
 async function sendMessage(message) {
   try{
     addMessage("user", message);
+    setDefaultDisable(true);
 
+    addMessage("assistant", '...')
     const response = await axios.post("/chat/history", { message: message });
+    removeLastMessage();
 
     addMessage("assistant", response.data.message);
     replaceActions(response.data.actions);
@@ -25,7 +28,7 @@ async function sendMessage(message) {
 
 async function resetHistory() {
   try{
-    const response = await axios.delete("/chat/history");
+    await axios.delete("/chat/history");
     clearMessages();
     await startInterview();
   } catch (error) {
@@ -39,11 +42,11 @@ function replaceActions(actions) {
   if (actions.length === 0) {
     chatDefaultActions.classList.remove("hidden");
     chatActions.classList.add("hidden");
-    btnSend.disabled = false;
+    setDefaultDisable(false)
   } else {
     chatDefaultActions.classList.add("hidden");
     chatActions.classList.remove("hidden");
-    btnSend.disabled = true;
+    setDefaultDisable(true)
   }
 
   let btnAction;
@@ -70,6 +73,11 @@ function removeLastMessage() {
 
 function clearMessages() {
   chatbox.innerHTML = "";
+}
+
+function setDefaultDisable(disable) {
+  btnSend.disabled = disable;
+  btnReset.disabled = disable;
 }
 
 const chatActions = document.getElementById("chat-actions");
