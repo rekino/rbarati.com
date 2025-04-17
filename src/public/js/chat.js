@@ -61,6 +61,7 @@ function addMessage(sender, text) {
   messageElem.className = sender === "assistant" ? "message confidant" : "message user"
   messageElem.innerHTML = text;
   chatbox.appendChild(messageElem);
+  messageElem.scrollIntoView();
 }
 
 function removeLastMessage() {
