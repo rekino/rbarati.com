@@ -12,6 +12,13 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Questions Table
+CREATE TABLE questions (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    _text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Chats Table (Stores chatbot interactions)
 CREATE TABLE IF NOT EXISTS chats (
     id INT AUTO_INCREMENT PRIMARY KEY,

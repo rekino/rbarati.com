@@ -12,7 +12,7 @@ const duration: Record<string, number> = {
 };
 
 // Endpoint to retrieve available time slots
-router.get("/availability", async (req: Request, res: Response, next: NextFunction) => {
+router.get("/availability", async (req: Request, res: Response) => {
   try {
     const { date, type } = req.query;
 
