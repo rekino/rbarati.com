@@ -23,6 +23,16 @@ async function sendMessage(message) {
   }
 }
 
+async function resetHistory() {
+  try{
+    const response = await axios.delete("/chat/history");
+    clearMessages();
+    await startInterview();
+  } catch (error) {
+    console.error("Error reseting history:", error);
+  }
+}
+
 function replaceActions(actions) {
   chatActions.innerHTML = "";
 
@@ -30,6 +40,10 @@ function replaceActions(actions) {
     chatDefaultActions.classList.remove("hidden");
     chatActions.classList.add("hidden");
     btnSend.disabled = false;
+  } else {
+    chatDefaultActions.classList.add("hidden");
+    chatActions.classList.remove("hidden");
+    btnSend.disabled = true;
   }
 
   let btnAction;
@@ -53,16 +67,25 @@ function removeLastMessage() {
   chatbox.removeChild(chatbox.lastChild);
 }
 
+function clearMessages() {
+  chatbox.innerHTML = "";
+}
+
 const chatActions = document.getElementById("chat-actions");
 const chatDefaultActions = document.getElementById("chat-default-actions");
 const btnStart = document.getElementById("start-btn");
 const btnSend = document.getElementById("send-btn");
+const btnReset = document.getElementById("reset-btn");
 const txtMessage = document.getElementById("chat-input");
 const chatbox = document.getElementById("chat-box");
 
 btnStart.addEventListener("click", startInterview);
 btnSend.addEventListener("click", () => {
   sendMessage(txtMessage.value);
+  txtMessage.value = "";
+})
+btnReset.addEventListener("click", () => {
+  resetHistory();
   txtMessage.value = "";
 })
 txtMessage.addEventListener("keypress", function(event) {

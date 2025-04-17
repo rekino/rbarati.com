@@ -76,4 +76,16 @@ router.post("/history", async (req: Request, res: Response) => {
   });
 });
 
+router.delete("/history", (req: Request, res: Response) => {
+  req.session.history = {
+    conversation: [{role: "assistant", content: "Welcome to Barati Professional Services! My name is Lancelot and I am Ramin's virtual assistant. To enhance our service and make your experience even better, we'd like to store your conversations with me. This data helps me train and improve my abilities in the future. Do you agree to the storage and analysis of your chat data?"}],
+    actions: [
+      {action: "Yes, I agree.", class: "btn btn-primary"},
+      {action: "No, don't record our conversation.", class: "btn btn-secondary"},
+    ],
+  };
+
+  res.json("OK");
+});
+
 export default router;
