@@ -7,22 +7,30 @@ block content
       .col-lg-6.d-none.d-lg-block
         .card
           .card-body
-            h3.text-center My Resume
-            p.text-muted Placeholder for resume content...
-            ul
-              li Experience 1
-              li Experience 2
-              li Education 1
-              li Skills: JavaScript, Node.js, AI
-            a.btn.btn-primary.mt-2(href="/resume.pdf" download="Resume.pdf") Download Resume
+            h3.text-center Curriclum Vitae
+            #cv-box.content-box
+              h4 Experience
+              ul
+                li Experience 1
+                li Experience 2
+              h4 Education
+              ul
+                li Education 1
+              h4 Skills
+              ul
+                li JavaScript
+                li Node.js
+                li AI
+            .action-box.input-group.mt-3
+              a.btn.btn-primary(href="/resume.pdf" download="Resume.pdf") Download Resume
 
       .col-lg-6
         .card
           .card-body
             h3.text-center Chat with my AI assisstant
-            #chat-box
+            #chat-box.content-box
             
-            #chat-actions.input-group.mt-3
+            #chat-actions.action-box.input-group.mt-3
               button#start-btn.btn.btn-primary Start or Continue Your Interview
             #chat-default-actions.input-group.mt-3.hidden
               button#reset-btn.btn.btn-secondary Reset
