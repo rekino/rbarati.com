@@ -80,6 +80,7 @@ function setDefaultDisable(disable) {
   btnReset.disabled = disable;
 }
 
+// UI Elements
 const chatActions = document.getElementById("chat-actions");
 const chatDefaultActions = document.getElementById("chat-default-actions");
 const btnStart = document.getElementById("start-btn");
@@ -88,6 +89,7 @@ const btnReset = document.getElementById("reset-btn");
 const txtMessage = document.getElementById("chat-input");
 const chatbox = document.getElementById("chat-box");
 
+// Events
 btnStart.addEventListener("click", startInterview);
 btnSend.addEventListener("click", () => {
   sendMessage(txtMessage.value);

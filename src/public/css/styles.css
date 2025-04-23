@@ -1,4 +1,4 @@
-#chat-box {
+.content-box {
   height: 400px;
   overflow-y: auto;
   border: 1px solid #ddd;
@@ -22,7 +22,7 @@
   background-color:lightblue;
   align-self: flex-end;
 }
-#chat-actions {
+.action-box {
   display: flex;
   justify-content: center;
 }

@@ -7,27 +7,24 @@ block content
       .col-lg-6.d-none.d-lg-block
         .card
           .card-body
-            h3.text-center My Resume
-            p.text-muted Placeholder for resume content...
-            ul
-              li Experience 1
-              li Experience 2
-              li Education 1
-              li Skills: JavaScript, Node.js, AI
-            a.btn.btn-primary.mt-2(href="/resume.pdf" download="Resume.pdf") Download Resume
+            h3.text-center Curriclum Vitae
+            #cv-box.content-box
+              embed(src="/resume.pdf", type="application/pdf" width="100%" height="100%")
+            .action-box.input-group.mt-3
+              a.btn.btn-primary(href="/resume.pdf" download="rbarati_resume.pdf") Download Resume
 
       .col-lg-6
         .card
           .card-body
             h3.text-center Chat with my AI assisstant
-            #chat-box
-            
-            #chat-actions.input-group.mt-3
+            #chat-box.content-box
+            #chat-actions.action-box.input-group.mt-3
               button#start-btn.btn.btn-primary Start or Continue Your Interview
             #chat-default-actions.input-group.mt-3.hidden
               button#reset-btn.btn.btn-secondary Reset
               textarea#chat-input.form-control(placeholder="Type a message...")
               button#send-btn.btn.btn-primary(default disabled) Send
 
-    script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
-    script(src="/js/chat.js")
+block scripts
+  script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+  script(src="/js/chat.js" type="module")
