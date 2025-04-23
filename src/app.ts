@@ -60,7 +60,7 @@ app.use(
         fontSrc: ["'self'", "https://cdn.jsdelivr.net"], // Allow fonts
         imgSrc: ["'self'", "data:", "https://code.jquery.com"], // Allow images
         connectSrc: ["'self'"],
-        objectSrc: ["'none'"],
+        objectSrc: ["'self'"],
       },
     },
   }),
