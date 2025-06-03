@@ -1,0 +1,65 @@
+[
+  {
+    "id": "SNET_UL",
+    "role": "Lead Developer",
+    "company": "SingularityNET",
+    "goal": "Implementing Clustering Heuristics in MeTTa",
+    "tasks": "We responded to their RFP on deepfunding.ai with a proposal to implement an open source (MIT licensed) library for MeTTa which implements KMeans, GMM, Spectral Clustering, Agglomerative Clustering and Bisecting KMeans with full documentation, tutorials and a technical report. We were a team of three data scientists and I was tasked with the communications and management of the project apart from my role as an algorithm engineer. The main challenge of the project was that MeTTa is a novel fully functional language specialized for AGI applications, so we had to learn the language as we developed the solution. There are almost no other libraries for MeTTa and we had to import the BLAS and visualization capabilities of Python libraries like Numpy and Seaborn into MeTTa. Being a pure functional language, we also had to convert the natively imperative algorithms into recursive functions.",
+    "results": "The project in whole took 3 months to complete. We successfully implemented all algorithms with comparable performance considering the constraints of MeTTa language and interpreter. However, the complexity of the Agglomerative clustering algorithm was too much to be practical. The issue is that MeTTa does not offer performant implementations of standard data structures such as lists and dictionaries and the added complexity of going through list operations such as removing and appending items in a naïve linked list manner proved to be too ineffective. A technical report was compiled and handed over to SNet with the relevant statistics and algorithmic details which outlined the challenges and the possible future directions.",
+    "skills": ["Python", "MeTTa", "algorithm", "functional", "unsupervised", "GIT"]
+  },
+  {
+    "id": "EID_AGE",
+    "role": "AI Engineer",
+    "company": "EvolutionID GmbH",
+    "goal": "Add age prediction capabilities to ID photo making and filter nonhuman faces",
+    "tasks": "The R&D department of EvolutionID was intending to add a feature to their product where the ID photo maker could be configured to restrict the age of users based on a picture of their face. They also wanted to improve the false positive rate of the face detector since it was common for the customers to test the product with pictures of cats and dogs and it the fact that the product would allow such false positives was not satisfactory for the customers. The main challenge of the project was to integrate the tasks and models into the product with minimal changes to the current codebase and to comply with the hardware requirements of the product.",
+    "results": "The project took a month to complete with an extra month for testing and debugging purposes. An SOTA age prediction model (MiVOLO) was integrated in the application for age prediction followed by a simple threshold classifier for Child vs. Adult classification. The native face detector of the model is YOLO. However, it would take almost a minute to run the model on CPU which was not acceptable. As a result, I replaced the detector in the original model with a performant SSD face detector that was already integrated in the application and brought the runtime of the model down to less than 3 seconds. To filter false positives, I trained a support vector classifier with RBF kernels on embeddings from a pretrained MobileNet DNN on animal and human faces from publicly available datasets which improved the performance of the face detector model from 80% to 98% on a mix of human, feline and canine faces while keeping the runtime of the pipline to one second. A technical report was compiled and handed over to EvolutionID with the relevant statistics and algorithmic details which outlined the challenges and the possible future directions.",
+    "skills": ["Python", "PyTorch", "Flask", "SVM", "image processing"]
+  },
+  {
+    "id": "PAYA_MLOPS",
+    "role": "Technical Lead",
+    "company": "Paya",
+    "goal": "As a contractor for public and private companies, Paya wanted to train customized models for various tasks such as computer vision, NLP, voice and speech recognition, etc. The privacy of the training and test data however was of outmost importance to the customers, and they were reluctant with using cloud services for their needs.",
+    "tasks": "I was tasked with leading and management of a team of data scientists and software developers to design and implement a solution that would satisfy the needs of the customers of Paya. After conducting surveys and interviews with the customers, we decided that the solution needs to be both deployable on Paya’s cloud and be deliverable on customers’ private cloud. After coming up with the relevant user scenarios and stories, I was tasked with software architecture and project management to deliver the solution to Paya. The main challenge of the project was in managing clear communications between technical and nontechnical teams and individuals and making sure that the project would not go over budget and time.",
+    "results": "A solution was developed in a year that would allow data scientists to package their models and their dependencies, such as databases and vector indices, in a docker image ready to be deployed on-premises or on Paya’s cloud with minimal coding needs. I left Paya with a solution that got successfully deployed to two of Paya’s main customers, and a team of professional individuals that were mentored in delivering enterprise-ready solutions with a culture based on putting quality first.",
+    "skills": ["Python", "machine learning", "mentorship", "leadership", "architecture", "design", "Agile", "continuous integration", "continuous delivery", "ML Ops"]
+  },
+  {
+    "id": "CN_DATA",
+    "role": "Data Engineer",
+    "company": "CarNext.com",
+    "goal": "The BI team of CarNext.com needed to get the data produced by diverse teams in a central Amazon Redshift database.",
+    "tasks": "At the time, CarNext.com used a third-party datamesh solution that would first gather all the data in data lake on amazon S3 in parquet files. As a data engineer, I was tasked with first gathering the required data from Kafka messages and then developing Scala applications for processing this data. The processed data would be inserted in Amazon Redshift tables and finally would become accessible to the BI department which involved updating a DBT script. These applications would then be scheduled to run daily by updating the relevant Terraform files. Apart from developing the pipeline, we were responsible for monitoring the pipelines as well, which consisted of writing tests for a Great Expectations instance and checking the relevant Slack channels. To fulfill my tasks, I needed to interview various teams and individuals and to be present in different meetings to figure out requirements and data sources for these pipelines.",
+    "results": "Throughout my contract with CarNext.com, I was developing up to four data processing pipelines in a month. I soon become known as a sharp person and an expert which could be consulted in a variety of situations. My understanding of software engineering and machine learning enabled me to be active in the majority of meetings to the point where people would mistake me with the technical lead of the data department.",
+    "skills": ["Scala", "consultancy", "AWS", "cloud", "IAM", "EC2", "Agile", "continuous integration", "continuous delivery", "Gitlab", "devops", "SQL"]
+  },
+  {
+    "id": "AT_CRYPTO",
+    "role": "Software Engineer",
+    "company": "Areatak",
+    "goal": "Areatak was developing a crypto exchange and wanted to have a solution to both test the website and make the crypto exchange lively at the time of its launch.",
+    "tasks": "As a software engineer, I was tasked with design and the implementation of the solution. It was decided that the solution would be consisting of a group of agents that would interact with the API of the exchange to emulate users' behaiviour in the exchange. In response, I used an agent-oriented approach as the architecture of the solution and implemented the BDI (Behaviour-Desire-Intent) logic of the agents. For example, one agent would gather the current value of some asset in other crypto exchanges and reported it to some other agent whose job was to decide on putting a sell order on the exchange. Similarly, agents were developed for putting buy orders and deleting orders that did not make financial sense. The solution was delivered in NodeJS and used Redis for message passing between the agents.",
+    "results": "The solution was implemented and deployed in 6 months. The results showed that the exchange is not ready to be launched since there were multiple bugs and shortcomings that got uncovered after we deployed the emulator.",
+    "skills": ["NodeJS", "architecture", "ExpressJS", "Redis", "Agile", "continuous integration", "Gitlab", "devops"]
+  },
+  {
+    "id": "TECHNO_CMS",
+    "role": "Full stack Developer",
+    "company": "Technolife.ir",
+    "goal": "As an emerging marketplace for technological products, Technolife was experiencing a growth in demand and user interactions. One of the more popular aspects of Technolife at the time was the time limited discounts that it would offer on certain products every week. As a result, users would rush to the website on the day the discounts were announced and the wordpress-based solution that they had could not deliver the required performance. As a result, Technolife was looking to develope its own software solution.",
+    "tasks": "I was tasked with developing the CMS side of the new shop. I used a MongoDB/ExpressJS/ReactJS stack in development and was in communication with the UI/UX team to update the solution as the needs of the frontend part of the solution was realised.",
+    "results": "I put the basis of the system in place and delivered a minimum viable product for the CMS part of the solution.",
+    "skills": ["NodeJS", "architecture", "ExpressJS", "NoSQL", "UI", "continuous integration", "Gitlab", "devops"]
+  },
+  {
+    "id": "MAHAN_ALG",
+    "role": "Algorithm Engineer",
+    "company": "Mahan Air",
+    "goal": "Mahan airlines was experiencing a steady growth in its operations and was planing on introducing more domestic and international flights to its roaster. As a result, the planing department needed to scale the performance of its services.",
+    "tasks": "It was decided that the solution would be to equip the planning department with computer-assisted planning to both increase the performance of the manually planed program and decrease the time needed. I was tasked with finding a suitable algorithm that satisfied both the time and the accuracy requirements of Mahan. I did R&D of seven different solutions before closing on MIP and CSP for the flight planning and crew assignments problems. After that, I was tasked with formulating the MIP and CSP problems and solving them using suitable solvers. I used the Google OR-tools library that interfaced with the COIN-OR solver. Next, my responsibilities transitioned to deploying and exposing the solver through a Flask API and refining the formulation to accomodate the requirements of the planning department. Later, I got involved with developing the UI/UX of the solution, as well as mentoring new comers on MIP and CSP.",
+    "results": "The solution was delivered to the planning department and in the preliminary tests enabled the planning department to decrease the time needed for planing by a factor of 3 while increasing the accuracy of the plan.",
+    "skills": ["Python", "operation research", "Flask", "HTML", "CSS", "JS"]
+  }
+]
