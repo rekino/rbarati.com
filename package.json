@@ -8,7 +8,7 @@
     "dev": "ts-node src/app.ts",
     "build": "tsc",
     "init-db": "ts-node src/initDb.ts",
-    "init-pinecone": "node dist/scripts/init_pinecone.js"
+    "init-pinecone": "ts-node src/initPinecone.ts"
   },
   "repository": {
     "type": "git",
