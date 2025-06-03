@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 import http from "http";
 import express from "express";
 import session from "express-session";
@@ -7,7 +9,6 @@ import helmet from "helmet";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
 require("./config/passport");
-require("dotenv").config();
 
 import { IChatMessage } from "./models/chat";
 
