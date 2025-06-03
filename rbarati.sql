@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS rbarati;
+CREATE OR REPLACE DATABASE rbarati;
+
 USE rbarati;
 
 -- Users Table
@@ -64,33 +65,11 @@ CREATE TABLE IF NOT EXISTS payments (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- Resume Sections (e.g., Education, Work Experience, Skills)
-CREATE TABLE IF NOT EXISTS resume_sections (
+-- Text chunks for RAG
+CREATE TABLE IF NOT EXISTS chat_augments (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL, -- Section title (e.g., "Education", "Work Experience", "Skills")
+    chunk TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Resume Items (e.g., individual experiences, degrees, skills)
-CREATE TABLE IF NOT EXISTS resume_items (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    section_id INT NOT NULL,
-    title VARCHAR(255) NOT NULL, -- Item title (e.g., "PhD in AI", "Software Engineer at Google")
-    description TEXT, -- More details (e.g., dates, responsibilities)
-    start_date DATE NULL, -- Optional for jobs and education
-    end_date DATE NULL, -- Optional, NULL if ongoing
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (section_id) REFERENCES resume_sections(id) ON DELETE CASCADE
-);
-
--- Resume Skills Table (For skills with levels)
-CREATE TABLE IF NOT EXISTS resume_skills (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    item_id INT NOT NULL, -- Links to a resume item
-    skill_name VARCHAR(255) NOT NULL, -- E.g., "Python", "Machine Learning"
-    proficiency ENUM('Beginner', 'Intermediate', 'Advanced', 'Expert') NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (item_id) REFERENCES resume_items(id) ON DELETE CASCADE
 );
 
 -- Indexes for faster lookups
@@ -99,5 +78,3 @@ CREATE INDEX idx_chat_user ON chats(user_id);
 CREATE INDEX idx_booking_user ON bookings(user_id);
 CREATE INDEX idx_rfp_user ON rfps(user_id);
 CREATE INDEX idx_payment_user ON payments(user_id);
-CREATE INDEX idx_resume_section ON resume_sections(title);
-CREATE INDEX idx_resume_item ON resume_items(title);
