@@ -28,14 +28,8 @@ async function run() {
 
     const records = experiences.map(exp => {
         return {
-            id: exp.id,
-            chunk_text: `${exp.role} at ${exp.company} - goals: ${exp.goal} - tasks: ${exp.tasks} - results: ${exp.results} - skills: ${exp.skills.join(',')}`,
-            role: exp.role,
-            company: exp.company,
-            goal: exp.goal,
-            tasks: exp.tasks,
-            results: exp.results,
-            skills: exp.skills
+            chunk_text: `${exp.role} at ${exp.company} from ${exp.from} to ${exp.to} - goals: ${exp.goal} - tasks: ${exp.tasks} - results: ${exp.results} - skills: ${exp.skills.join(',')}`,
+            ...exp
         }
     });
 
