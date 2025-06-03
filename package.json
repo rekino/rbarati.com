@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node dist/app.js",
     "dev": "ts-node src/app.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "init-db": "ts-node src/initDb.ts",
+    "init-pinecone": "node dist/scripts/init_pinecone.js"
   },
   "repository": {
     "type": "git",
