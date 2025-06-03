@@ -1,6 +1,8 @@
 [
   {
     "id": "SNET_UL",
+    "from": "April 2025",
+    "to": "June 2025",
     "role": "Lead Developer",
     "company": "SingularityNET",
     "goal": "Implementing Clustering Heuristics in MeTTa",
@@ -10,6 +12,8 @@
   },
   {
     "id": "EID_AGE",
+    "from": "November 2024",
+    "to": "January 2025",
     "role": "AI Engineer",
     "company": "EvolutionID GmbH",
     "goal": "Add age prediction capabilities to ID photo making and filter nonhuman faces",
@@ -19,15 +23,19 @@
   },
   {
     "id": "PAYA_MLOPS",
+    "from": "January 2023",
+    "to": "January 2025",
     "role": "Technical Lead",
     "company": "Paya",
     "goal": "As a contractor for public and private companies, Paya wanted to train customized models for various tasks such as computer vision, NLP, voice and speech recognition, etc. The privacy of the training and test data however was of outmost importance to the customers, and they were reluctant with using cloud services for their needs.",
-    "tasks": "I was tasked with leading and management of a team of data scientists and software developers to design and implement a solution that would satisfy the needs of the customers of Paya. After conducting surveys and interviews with the customers, we decided that the solution needs to be both deployable on Paya’s cloud and be deliverable on customers’ private cloud. After coming up with the relevant user scenarios and stories, I was tasked with software architecture and project management to deliver the solution to Paya. The main challenge of the project was in managing clear communications between technical and nontechnical teams and individuals and making sure that the project would not go over budget and time.",
-    "results": "A solution was developed in a year that would allow data scientists to package their models and their dependencies, such as databases and vector indices, in a docker image ready to be deployed on-premises or on Paya’s cloud with minimal coding needs. I left Paya with a solution that got successfully deployed to two of Paya’s main customers, and a team of professional individuals that were mentored in delivering enterprise-ready solutions with a culture based on putting quality first.",
+    "tasks": "I was tasked with leading and management of a team of data scientists and software developers to design and implement a solution that would satisfy the needs of the customers of Paya. After conducting surveys and interviews with the customers, we decided that the solution needs to be both deployable on Paya's cloud and be deliverable on customers' private cloud. After coming up with the relevant user scenarios and stories, I was tasked with software architecture and project management to deliver the solution to Paya. The main challenge of the project was in managing clear communications between technical and nontechnical teams and individuals and making sure that the project would not go over budget and time.",
+    "results": "A solution was developed in a year that would allow data scientists to package their models and their dependencies, such as databases and vector indices, in a docker image ready to be deployed on-premises or on Paya's cloud with minimal coding needs. I left Paya with a solution that got successfully deployed to two of Paya's main customers, and a team of professional individuals that were mentored in delivering enterprise-ready solutions with a culture based on putting quality first.",
     "skills": ["Python", "machine learning", "mentorship", "leadership", "architecture", "design", "Agile", "continuous integration", "continuous delivery", "ML Ops"]
   },
   {
     "id": "CN_DATA",
+    "from": "September 2021",
+    "to": "May 2022",
     "role": "Data Engineer",
     "company": "CarNext.com",
     "goal": "The BI team of CarNext.com needed to get the data produced by diverse teams in a central Amazon Redshift database.",
@@ -37,6 +45,8 @@
   },
   {
     "id": "AT_CRYPTO",
+    "from": "January 2021",
+    "to": "July 2021",
     "role": "Software Engineer",
     "company": "Areatak",
     "goal": "Areatak was developing a crypto exchange and wanted to have a solution to both test the website and make the crypto exchange lively at the time of its launch.",
@@ -46,6 +56,8 @@
   },
   {
     "id": "TECHNO_CMS",
+    "from": "April 2020",
+    "to": "December 2020",
     "role": "Full stack Developer",
     "company": "Technolife.ir",
     "goal": "As an emerging marketplace for technological products, Technolife was experiencing a growth in demand and user interactions. One of the more popular aspects of Technolife at the time was the time limited discounts that it would offer on certain products every week. As a result, users would rush to the website on the day the discounts were announced and the wordpress-based solution that they had could not deliver the required performance. As a result, Technolife was looking to develope its own software solution.",
@@ -55,6 +67,8 @@
   },
   {
     "id": "MAHAN_ALG",
+    "from": "September 2017",
+    "to": "January 2020",
     "role": "Algorithm Engineer",
     "company": "Mahan Air",
     "goal": "Mahan airlines was experiencing a steady growth in its operations and was planing on introducing more domestic and international flights to its roaster. As a result, the planing department needed to scale the performance of its services.",
